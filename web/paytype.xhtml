@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+
+            <p:dataTable var="cart" value="#{cartHandlerMB.cartList}"  rows="10">
+                <f:facet name="header">
+                    <h:outputLabel value="Your Cart"/>
+                </f:facet>
+                <p:column headerText="Product Name">
+                    <p:outputLabel value="#{cart.productname}"/>
+                </p:column>
+                <p:column headerText="Quantity">
+                    <p:outputLabel value="#{cart.quantity}"/>
+                </p:column>
+                <p:column headerText="Price">
+                    <p:outputLabel value="#{cart.price}"/>
+                </p:column>
+                <p:column headerText="Total">
+                    <p:outputLabel value="#{cart.total}"/>
+                </p:column>
+            </p:dataTable>
+            <p:panel header="Delivary Info">
+                <p:panelGrid columns="2">
+                    <h:outputText value="Delivary Address"/>
+                    <h:inputTextarea value=""></h:inputTextarea>
+                    <h:outputText value="Select Zone"/>
+                    <p:selectOneMenu value="#{cartHandlerMB.selectedzone}">
+                        <f:selectItem itemLabel="Select Zone" itemValue="" />
+                        <f:selectItems value="#{cartHandlerMB.zoneName}"/>
+                    </p:selectOneMenu>
+                    <h:outputText value="Payment Type"/>
+                    <p:selectOneRadio id="options" value="">  
+                        <f:selectItem itemLabel="Card" itemValue="1" />  
+                        <f:selectItem itemLabel="Cash" itemValue="2" />
+                    </p:selectOneRadio> 
+                </p:panelGrid>
+            </p:panel>
+            <h:outputLink value="display.xhtml"> Process Cart</h:outputLink>
+        </h:form>
+    </h:body>
+</html>
+

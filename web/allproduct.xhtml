@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <style>
+            .product{
+                width: 150px;
+                height: 200px;
+                float: left;
+                margin-right: 10px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form id="form"> 
+            <p:panel header="cart">
+                <h:outputText value="#{shoppingCart.cartsize} #{shoppingCart.item}" id="cart"/>
+                <h:outputLink value="cart.xhtml"> View Cart</h:outputLink>
+            </p:panel>
+             <p:dataGrid var="p" value="#{displayProductMB.allProduct}" columns="3" rows="10" paginator="true" id="p" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="6,12,16">
+                <f:facet name="header">
+                    <h:outputLabel value="All Products"/>
+                </f:facet>
+                <!--<c:forEach items="{displayProductMB.allProduct}" var="p">-->
+                 <p:panel header="Name: #{p.proName}">
+                        <h:panelGrid columns="1">
+                        <h:graphicImage name="#{p.proUrl}" library="images" width="100" height="150" />
+                        <h:outputLabel value="Price: #{p.proPrice}"/>
+                        <p:commandButton action="#{shoppingCart.addtoCart(p)}" value="Add to Cart" ajax="false"/>
+                    </h:panelGrid>
+                     </p:panel>
+                <!--</c:forEach>-->
+            </p:dataGrid>
+        </h:form>
+    </h:body>
+</html>
+
